@@ -16,7 +16,7 @@ import java.util.List;
  * 回调的基本过程：
  * 当A调用B的某个函数时，B由于信息不足，需要由A来传入一个函数，B在执行它的方法时会调用A传入的函数。
  * 本来A是调用B，现在B又需要调用A的一个函数来完成自己的任务，该函数因而被称为回调函数。
- *
+ * <p>
  * 回调函数的实现机制：
  * (1)定义一个回调函数
  * (2)将回调函数的函数指针注册给调用者(B)（例如之前的库函数）
@@ -36,12 +36,22 @@ class Student {
     }
 }
 
-public class Code1_callback {
-    public static void main(String[] args) {
+class MakeStudent {
+
+    public List<Student> getStudents() {
         List<Student> students = new ArrayList<>();
         students.add(new Student(16, 164, 56));
         students.add(new Student(15, 174, 50));
         students.add(new Student(17, 184, 64));
+        return students;
+    }
+}
+
+public class Code1_callback {
+    public static void main(String[] args) {
+        MakeStudent makeStudent = new MakeStudent();
+        List<Student> students = makeStudent.getStudents();
+
         Collections.sort(students, new Comparator<Student>() {  // 这里采用匿名内部类的形式
             // Comparator接口：因为Java中没有指针的概念，所以由接口来提供回调函数
             // compare函数，即回调函数，由我们实现，系统来调用

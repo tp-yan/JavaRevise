@@ -1,6 +1,5 @@
 package ch28;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,10 +25,8 @@ public class Code2_callback {
 
     // 模拟自己的函数A
     public static void main(String[] args) {
-        List<Student> students = new ArrayList<>();
-        students.add(new Student(16, 164, 56));
-        students.add(new Student(15, 174, 50));
-        students.add(new Student(17, 184, 64));
+        MakeStudent makeStudent = new MakeStudent();
+        List<Student> students = makeStudent.getStudents();
 
         // 因为学生有三个属性，所以必须由我们告诉(传入接口实现)calculateAvg计算哪个属性，而calculateAvg本身没有决定使用哪个属性
         float avgAge = calculateAvg(students, new IAttributeGetter() { // 传入实际的回调函数实现
